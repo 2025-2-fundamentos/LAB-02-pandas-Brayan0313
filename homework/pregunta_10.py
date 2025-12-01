@@ -6,6 +6,9 @@ librerias de pandas para resolver las preguntas.
 """
 
 
+import pandas as pd
+
+
 def pregunta_10():
     """
     Construya una tabla que contenga `c1` y una lista separada por ':' de los
@@ -20,3 +23,17 @@ def pregunta_10():
     D                   1:2:3:5:5:7
     E   1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
+
+    archivo_path = "files/input/tbl0.tsv"
+    df = pd.read_csv(archivo_path, sep="\t")
+
+    tabla = (
+        df.groupby("c1")["c2"]
+        .apply(lambda x: ":".join(sorted(map(str, x))))
+        .reset_index()
+    )
+
+    tabla.columns = ["c1", "c2"]
+
+    tabla = tabla.set_index("c1")
+    return tabla

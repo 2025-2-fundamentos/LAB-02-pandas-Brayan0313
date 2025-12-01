@@ -6,6 +6,9 @@ librerias de pandas para resolver las preguntas.
 """
 
 
+import pandas as pd
+
+
 def pregunta_11():
     """
     Construya una tabla que contenga `c0` y una lista separada por ',' de
@@ -22,3 +25,14 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
+
+    archivo_path = "files/input/tbl1.tsv"
+    df = pd.read_csv(archivo_path, sep="\t")
+
+    tabla = (
+        df.groupby("c0")["c4"]
+        .apply(lambda x: ",".join(sorted(map(str, x))))
+        .reset_index()
+    )
+
+    return tabla

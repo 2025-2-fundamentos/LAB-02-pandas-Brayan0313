@@ -6,6 +6,9 @@ librerias de pandas para resolver las preguntas.
 """
 
 
+import pandas as pd
+
+
 def pregunta_06():
     """
     Retorne una lista con los valores unicos de la columna `c4` del archivo
@@ -15,3 +18,12 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
+
+    archivo_path = "files/input/tbl1.tsv"
+    df = pd.read_csv(archivo_path, sep="\t")
+
+    return sorted(list(set(valor.upper() for valor in df["c4"])))
+
+
+if "__main__" in __name__:
+    print(pregunta_06())
